@@ -17,7 +17,7 @@ bool Group1Option1::is_Balanced_Parenthesis(const string& expression)
 
 	bool failed = false;
 
-	for (unsigned int i = 0; !failed && (i < expression.length()); i++)
+	for (unsigned int i = 0; !failed && (i < expression.length()); i++) // need fix, if expression has no parenthesis return failed = true
 	{
 		next = expression[i];
 		if (next == LEFT_PARENTHESIS)
