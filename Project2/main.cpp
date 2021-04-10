@@ -31,7 +31,7 @@ int main()
 		switch (option)
 		{
 			case 0: exit(1);
-			case 1: option1(); break;			// Simple Calculator
+			case 1: option1(); break;			// Simple Calculator *** not working with (1+1+1+1) 4 numbers together
 			case 2: cout << "\nTBD\n"; break;	// Translation of arithmetic expression
 			case 3: cout << "\nTBD\n"; break;	// n-Queens Problem
 		}
