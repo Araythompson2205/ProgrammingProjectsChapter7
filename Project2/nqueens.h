@@ -18,8 +18,8 @@ public:
 		while (x >= 0 && x < board.size()
 			&& y >= 0 && y < board[0].size())
 		{
-			x = Xtf(x);
-			y = Ytf(y);
+			//x = Xtf(x);
+			//y = Ytf(y);
 			if (board[x][y]) return false;
 		}
 		return true;

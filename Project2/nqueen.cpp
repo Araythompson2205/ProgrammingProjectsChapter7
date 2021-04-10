@@ -30,10 +30,13 @@ bool Nqueen::isConflict() {
 	);
 }
 
-bool Nqueen::solve() {
+bool Nqueen::solve() 
+{
 	std::stack<int> col;
 
 	bool stop = false;
-	while (!stop && !col.empty()) {
+	while (!stop && !col.empty()) 
+	{
+		return true;
 	}
 }

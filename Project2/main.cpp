@@ -1,8 +1,16 @@
+// Participants: Gabriela Lopez, Andrew Thompson, Long Duong, Christopher Gomez, Gia Minh Hoang, Duyen Tran and Lincoln Nguyen
+// Date: 04-8-21
+// Description: Chapter 7 Solution
+
 #include<iostream>
 #include <string>
 #include "input.h"
 #include "option1.h"
 using namespace std;
+
+//Precondition: being called
+//Postcondition: starts the simple calculator program
+void option1();
 
 // driver function/program
 int main()
@@ -35,4 +43,20 @@ int main()
 
 	return 0;
 
+}
+
+//page 365
+void option1()
+{
+	using namespace Group1Option1;
+	system("cls");
+	cout << "\n 1> Simple Calculator\n";
+	cout << string(100, char(196)) << '\n';
+
+	double answer = 0.0;
+	string expression = "";
+
+	cout << " Type a fully parenthesized arithmetic expression: \n\n ";
+	if (read_And_Evaluate(cin, expression, answer))
+		cout << "\n " << expression << " = " << answer << '\n';
 }
