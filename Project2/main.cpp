@@ -10,7 +10,7 @@ int main()
 	do
 	{
 		system("cls");
-		cout << "\n\t\t  CMPR131 Chapter 7: Applications using Stacks by Prof Q (1/6/21)";
+		cout << "\n\t\t  CMPR131 Chapter 7: Applications using Stacks by ";
 		cout << "\n\t\t" << string(70, char(205));
 		cout << "\n\t\t  1> Simple Calculator (problem 9, pg 391)";
 		cout << "\n\t\t  2> Translation of arithmetic expression (problem 10, pg 391)";
@@ -36,4 +36,3 @@ int main()
 	return 0;
 
 }
-
