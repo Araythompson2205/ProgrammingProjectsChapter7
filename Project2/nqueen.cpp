@@ -30,7 +30,8 @@ bool Nqueen::isConflict() {
 	);
 }
 
-bool Nqueen::solve() {
+bool Nqueen::solve() 
+{
 	std::stack<int> col;
 
 	col.push(0);
