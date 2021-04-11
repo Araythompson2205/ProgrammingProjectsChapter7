@@ -7,6 +7,7 @@
 #include "input.h"
 #include "option1.h"
 #include "option2.h"
+#include "option3.h"
 using namespace std;
 
 //Precondition: being called
@@ -41,7 +42,7 @@ int main()
 			case 0: exit(1);
 			case 1: option1(); break;			// Simple Calculator *** not working with (1+1+1+1) 4 numbers together
 			case 2: option2(); break;	// Translation of arithmetic expression
-			case 3: cout << "\nTBD\n"; break;	// n-Queens Problem
+			case 3: option3(); break;	// n-Queens Problem
 		}
 
 		cout << '\n';

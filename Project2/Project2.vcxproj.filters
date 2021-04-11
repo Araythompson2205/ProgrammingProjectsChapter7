@@ -38,5 +38,8 @@
     <ClInclude Include="option2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="option3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

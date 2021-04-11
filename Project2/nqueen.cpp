@@ -1,8 +1,7 @@
 #include "nqueens.h"
 #include <algorithm>
 
-Nqueen::Nqueen(std::vector<std::vector<bool>> board)
-	: board {board}
+Nqueen::Nqueen(std::vector<std::vector<bool>> board):board {board}
 {
 }
 
