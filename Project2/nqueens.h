@@ -13,13 +13,13 @@ public:
 	bool solve();
 	bool isConflict();
 	template <typename Xtf, typename Ytf>
-	bool isPathFree(int x, int y, Xtf&&, Ytf&&)
+	bool isPathFree(int x, int y, Xtf&& xtf, Ytf&& ytf)
 	{
 		while (x >= 0 && x < board.size()
 			&& y >= 0 && y < board[0].size())
 		{
-			x = Xtf(x);
-			y = Ytf(y);
+			x = xtf(x);
+			y = ytf(y);
 			if (board[x][y]) return false;
 		}
 		return true;

@@ -33,7 +33,29 @@ bool Nqueen::isConflict() {
 bool Nqueen::solve() {
 	std::stack<int> col;
 
-	bool stop = false;
-	while (!stop && !col.empty()) {
+	col.push(0);
+	bool success = false;
+	while (!success && !col.empty()) {
+		if (isConflict()) {
+			int row = col.top();
+			col.pop();
+			if (row == board.size() - 1) {
+				col.pop();
+				continue;
+			}
+			else {
+				col.push(row + 1);
+				continue;
+			}
+		}
+		else
+		{
+			if (col.size() == board.size()) {
+				success = true;
+				continue;
+			}
+			col.push(0);
+		}
 	}
+	return false;
 }
