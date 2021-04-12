@@ -34,27 +34,39 @@ bool Nqueen::solve()
 	std::stack<int> col;
 
 	col.push(0);
-	bool success = false;
-	while (!success && !col.empty()) {
-		if (isConflict()) {
-			int row = col.top();
-			col.pop();
-			if (row == board.size() - 1) {
-				col.pop();
-				continue;
-			}
-			else {
-				col.push(row + 1);
-				continue;
-			}
-		}
-		else
-		{
-			if (col.size() == board.size()) {
-				success = true;
-				continue;
-			}
+	while (!col.empty()) {
+		std::cout << isConflict() << std::endl
+			<< *this << std::endl;
+		int row_ = col.top();
+		int col_ = col.size() - 1;
+
+		if (!isConflict() && col_ == board.size() - 1) return true;
+		else if (!isConflict() && col_ < board.size() - 1) {
 			col.push(0);
+			board[col.top()][col.size() - 1] = true;
+		}
+		else {
+			board[col.top()][col.size() - 1] = false;
+			col.pop();
+			if (row_ + 1 == board.size())
+			{
+				if (col.empty()) return false;
+				do {
+					board[col.top()][col.size() - 1] = false;
+					col.pop();
+				} while (!col.empty() && col.top() == board.size() - 1);
+				if (col.empty()) return false;
+				else {
+					board[col.top()][col.size() - 1] = false;
+					int prev = col.top();
+					col.pop();
+					col.push(prev + 1);
+					board[col.top()][col.size() - 1] = true;
+				}
+				continue;
+			}
+			col.push(row_ + 1);
+			board[col.top()][col.size() - 1] = true;
 		}
 	}
 	return false;

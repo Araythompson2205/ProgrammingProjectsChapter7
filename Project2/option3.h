@@ -22,6 +22,7 @@ void option3()
 	b1[0][0] = true;
 	Nqueen q1(b1);
 
-	q1.solve();
-	cout << q1;
+	bool found = q1.solve();
+	if (!found) cout << "No solution" << endl;
+	else cout << q1;
 }
