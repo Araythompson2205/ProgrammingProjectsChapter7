@@ -1,8 +1,9 @@
 #include "nqueens.h"
 #include <algorithm>
 #include <array>
+#include <thread>
 
-Nqueen::Nqueen(std::vector<std::vector<bool>> board):board {board}
+Nqueen::Nqueen(std::vector<std::vector<int>> board):board {board}
 {
 }
 
@@ -31,9 +32,9 @@ bool Nqueen::isConflict() {
 	);
 }
 
-bool Nqueen::isConflictFast(int y, int x, std::vector<std::vector<bool>>& board) {
+bool Nqueen::isConflictFast(int y, int x, std::vector<std::vector<int>>& board) {
 	std::array<bool, 8> possibilities;
-	for (int i = 0; i < 8; i++) possibilities[i] = true;
+	for (int i = 0; i < 8; i++) possibilities[i] = NO_Q;
 	possibilities[0] = (isPathFree(x, y, TF(v + 1), TF(v)));
 	possibilities[1] = (isPathFree(x, y, TF(v - 1), TF(v)));
 	possibilities[2] = (isPathFree(x, y, TF(v), TF(v + 1)));
@@ -54,6 +55,7 @@ bool Nqueen::solve()
 	std::stack<int> col;
 
 	col.push(0);
+
 	while (!col.empty()) {
 		int row_ = col.top();
 		int col_ = col.size() - 1;
@@ -63,19 +65,19 @@ bool Nqueen::solve()
 		if (!isConflict_ && col_ == board.size() - 1) return true;
 		else if (!isConflict_ && col_ < board.size() - 1) {
 			col.push(0);
-			board[col.top()][col.size() - 1] = true;
+			board[col.top()][col.size() - 1] = Q;
 		}
 		else {
 			while (!col.empty() && col.top() == board.size() - 1)
 			{
-				board[col.top()][col.size() - 1] = false;
+				board[col.top()][col.size() - 1] = NO_Q;
 				col.pop();
 			}
 			if (col.empty()) return false;
 			else {
-				board[col.top()][col.size() - 1] = false;
+				board[col.top()][col.size() - 1] = NO_Q;
 				col.top()++;
-				board[col.top()][col.size() - 1] = true;
+				board[col.top()][col.size() - 1] = Q;
 			}
 		}
 	}

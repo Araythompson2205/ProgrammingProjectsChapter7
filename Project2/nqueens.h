@@ -8,12 +8,17 @@ using namespace std;
 
 class Nqueen {
 public:
+	static const int Q = 1;
+	static const int NO_Q = 0;
+	static const int INFLUENCE = -1;
+
 	// accepts 2d array with queen = true;
-	Nqueen(std::vector<std::vector<bool>> board);
+	Nqueen(std::vector<std::vector<int>> board);
 
 	bool solve();
 	bool isConflict();
-	bool isConflictFast(int col, int row, std::vector<std::vector<bool>>& board);
+	bool isConflictFast(int col, int row, std::vector<std::vector<int>>& board);
+
 	template <typename Xtf, typename Ytf>
 	inline bool isPathFree(int x, int y, Xtf&& xtf, Ytf&& ytf)
 	{
@@ -24,7 +29,7 @@ public:
 			y = ytf(y);
 			if (x >= size || y >= size || x < 0 || y < 0)
 				break;
-			if (board[x][y]) 
+			if (board[x][y] == Q) 
 				return false;
 		}
 		return true;
@@ -34,12 +39,10 @@ public:
 		for (int i = 0; i < obj.board.size(); i++) {
 			for (int j = 0; j <obj.board.size(); j++) {
 				outs << '|';
-				if (obj.board[j][i] == false)
+				if (obj.board[j][i] == Nqueen::NO_Q)
 					outs << '_';
-				else if (obj.board[j][i] == true)
+				else if (obj.board[j][i] == Nqueen::Q)
 					outs << 'Q';
-				else
-					outs << "Error!";
 
 			}
 			outs << '|' << '\n';
@@ -48,5 +51,5 @@ public:
 	}
 
 private:
-	std::vector<std::vector<bool>> board;
+	std::vector<std::vector<int>> board;
 };
