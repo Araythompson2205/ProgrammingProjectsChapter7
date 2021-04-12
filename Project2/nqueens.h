@@ -4,7 +4,7 @@
 #include <stack>
 #include <iostream>
 using namespace std;
-#define TF(e) [](int v) {return e; }
+#define TF(e) [](const int& v) {return e; }
 
 class Nqueen {
 public:
@@ -13,14 +13,16 @@ public:
 
 	bool solve();
 	bool isConflict();
+	bool isConflictFast(int col, int row, std::vector<std::vector<bool>>& board);
 	template <typename Xtf, typename Ytf>
-	bool isPathFree(int x, int y, Xtf&& xtf, Ytf&& ytf)
+	inline bool isPathFree(int x, int y, Xtf&& xtf, Ytf&& ytf)
 	{
-		while (x >= 0 && x < board.size() && y >= 0 && y < board.size())
+		int size = board.size();
+		while (x >= 0 && x < size && y >= 0 && y < size)
 		{
 			x = xtf(x);
 			y = ytf(y);
-			if (x >= board.size() || y >= board.size())
+			if (x >= size || y >= size || x < 0 || y < 0)
 				break;
 			if (board[x][y]) 
 				return false;
@@ -32,9 +34,9 @@ public:
 		for (int i = 0; i < obj.board.size(); i++) {
 			for (int j = 0; j <obj.board.size(); j++) {
 				outs << '|';
-				if (obj.board[i][j] == false)
+				if (obj.board[j][i] == false)
 					outs << '_';
-				else if (obj.board[i][j] == true)
+				else if (obj.board[j][i] == true)
 					outs << 'Q';
 				else
 					outs << "Error!";
