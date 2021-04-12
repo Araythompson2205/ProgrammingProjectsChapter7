@@ -31,11 +31,10 @@ bool Nqueen::isConflict() {
 	);
 }
 
-bool Nqueen::isConflictFast(int col, int row, std::vector<std::vector<bool>>& board) {
+bool Nqueen::isConflictFast(int y, int x, std::vector<std::vector<bool>>& board) {
 	std::array<bool, 8> possibilities;
-	int x = row; 
-	int y = col;
-	possibilities.at(0)= (isPathFree(x, y, TF(v + 1), TF(v)));
+	for (int i = 0; i < 8; i++) possibilities[i] = true;
+	possibilities[0] = (isPathFree(x, y, TF(v + 1), TF(v)));
 	possibilities[1] = (isPathFree(x, y, TF(v - 1), TF(v)));
 	possibilities[2] = (isPathFree(x, y, TF(v), TF(v + 1)));
 	possibilities[3] = (isPathFree(x, y, TF(v), TF(v - 1)));
@@ -67,25 +66,17 @@ bool Nqueen::solve()
 			board[col.top()][col.size() - 1] = true;
 		}
 		else {
-			if (row_ + 1 == board.size())
+			while (!col.empty() && col.top() == board.size() - 1)
 			{
-				do {
-					board[col.top()][col.size() - 1] = false;
-					col.pop();
-				} while (!col.empty() && col.top() == board.size() - 1);
-				if (col.empty()) return false;
-				else {
-					board[col.top()][col.size() - 1] = false;
-					col.top()++;
-					board[col.top()][col.size() - 1] = true;
-				}
+				board[col.top()][col.size() - 1] = false;
+				col.pop();
 			}
+			if (col.empty()) return false;
 			else {
 				board[col.top()][col.size() - 1] = false;
 				col.top()++;
 				board[col.top()][col.size() - 1] = true;
 			}
-		
 		}
 	}
 	return false;
