@@ -9,7 +9,7 @@ void option3();
 
 void option3()
 {
-	bool jim = true;
+	
 	int Q = 1;
 	int NO_Q = 0;
 	int INFLUENCE = -1;
@@ -21,7 +21,9 @@ void option3()
 			b1[i][j] = NO_Q;
 		}
 	}
-	b1[0][0] = Q;
+	int col = inputInteger("\nenter the column to place the first queen: ", 1, dimensions);
+	col = col - 1;
+	b1[0][col] = Q;
 	Nqueen q1(b1);
 
 	bool found = q1.solve();
