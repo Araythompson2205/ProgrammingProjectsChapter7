@@ -1,4 +1,4 @@
-// Participants: Prof. Quach (Textbook)
+// Participants: Prof. Quach (Textbook), Gabriela Lopez
 // Date: 04-8-21
 // Description: simple calculator header
 
