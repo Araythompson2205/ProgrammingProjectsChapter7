@@ -107,9 +107,7 @@ string ConvertInfixToPostfix(string infix, stack<char> hold)
 		{
 			hold.push(infix[i]);
 		}
-		else if ((infix[i] >= 'a' && infix[i] >= 'A')
-			|| (infix[i] >= 'z' && infix[i] >= 'Z')
-			|| (infix[i] >= '0' || infix[i] >= '9'))
+		else if ((infix[i] >= 'a' && infix[i] <= 'z')|| (infix[i] >= 'A' && infix[i] <= 'Z')|| (infix[i] >= '0' && infix[i] <= '9'))
 		{
 			postfix += infix[i];
 		}
@@ -121,7 +119,7 @@ string ConvertInfixToPostfix(string infix, stack<char> hold)
 			}
 			else
 			{
-				if (precedence(infix[i]) < precedence(hold.top()))
+				if (precedence(infix[i]) <= precedence(hold.top()))
 				{
 					hold.push(infix[i]);
 				}
