@@ -6,7 +6,8 @@
 #include <string>
 using namespace std;
 #include "option1.h"
-
+//preconditions: an entered expression
+//postconditions: returns true if parenthesis are balanced and false if not
 bool Group1Option1::is_Balanced_Parenthesis(const string& expression)
 {
 	const char LEFT_PARENTHESIS = '(';
@@ -41,7 +42,8 @@ bool Group1Option1::is_Balanced_Parenthesis(const string& expression)
 	else
 		return (store.empty() && !failed);
 }
-
+//preconditions: an expression
+//postconditions: evaluates the expression
 void Group1Option1::evaluate_Stack_Tops(stack<double>& operands, stack<char>& operators)
 {
 	if (!operators.empty())
@@ -131,7 +133,10 @@ bool Group1Option1::read_And_Evaluate(istream& ins, string& expression, double& 
 	{
 		if (!operands.empty())
 		{
-			evaluate_Stack_Tops(operands, operators);
+			while (!operators.empty())
+			{
+				evaluate_Stack_Tops(operands, operators);
+			}
 			answer = operands.top();
 			return true;
 		}

@@ -1,3 +1,6 @@
+//names: Gia Minh Hoang, Duyen Tran, Andrew Thompson
+//date due: 4/14/2021
+//description: class declaration and definition for a small calculator program, with some non-member functions also used by the program.
 #pragma once
 #include <cctype> // Provides isdigit
 #include <cstdlib> // Provides EXIT_SUCCESS
@@ -19,10 +22,20 @@ private:
 	string postfix;
 	double number;
 public:
+	//preconditions: N/a
+	//postconditions: Creates a default arithmetic object
 	arithmetic();
+	//preconditions: An arithmetic object, and findPostfix has been called
+	//postconditions: returns the postfix expression of a user entered infix expression
 	string getPostFix() const;
+	//preconditions: an arithmetic object, and evaluate has been called
+	//postconditions: returns the evaluated number from a postfix expression
 	double getNumber() const;
+	//preconditions: an arithmetic object
+	//postconditions: translates an input infix expression to postfix
 	bool findPostFix();
+	//preconditions: a arithmetic object and an expression
+	//postconditions: evaluates the expression, asking the user to replace a variable when nessicary
 	void evaluate(string expression);
 };
 arithmetic::arithmetic()
@@ -31,7 +44,11 @@ arithmetic::arithmetic()
 	number = 0.0;
 
 }
+//preconditions: a operator 
+//postconditions: returns 1-3 based on the operators precedence. returns -1 on error
 int precedence(char operat);
+//preconditions: an expression
+//postconditions: returns true if parenthesis are balance or if there are no parenthesis, as postfix discards them anyways.
 bool isBalancedParenthesis(const string& expression);
 string arithmetic::getPostFix() const
 {
@@ -123,27 +140,15 @@ void arithmetic::evaluate(string expression)
 
 			b = operands.top();
 			operands.pop();
-
-			if (expression[i] == '+')
+			switch (expression[i])
 			{
-				operands.push(b + a);
+			case'+':operands.push(b + a); break;
+			case'-':operands.push(b - a); break;
+			case'*':operands.push(b * a); break;
+			case'/':operands.push(b / a); break;
+			case'^':operands.push(pow(b, a)); break;
 			}
-			else if (expression[i] == '-')
-			{
-				operands.push(b - a);
-			}
-			else if (expression[i] == '*')
-			{
-				operands.push(b * a);
-			}
-			else if (expression[i] == '/')
-			{
-				operands.push(b / a);
-			}
-			else if (expression[i] == '^')
-			{
-				operands.push(pow(b, a));
-			}
+			
 		}
 
 	}
