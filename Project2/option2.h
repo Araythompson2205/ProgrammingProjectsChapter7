@@ -127,7 +127,7 @@ string ConvertInfixToPostfix(string infix, stack<char> hold)
 				{
 					hold.push(infix[i]);
 				}
-
+				else
 				{
 					while ((!hold.empty()) && (precedence(hold.top() >= precedence(infix[i]))))
 					{
