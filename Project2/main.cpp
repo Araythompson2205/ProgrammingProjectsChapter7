@@ -67,6 +67,9 @@ void option1()
 
 	cout << " Type a fully parenthesized arithmetic expression: \n\n ";
 	if (read_And_Evaluate(cin, expression, answer))
+		if (answer == INFINITY)
+			cout << "\nIt evaluates to inf.\n";
+		else
 		cout << "\n " << expression << " = " << answer << '\n';
 }
 
