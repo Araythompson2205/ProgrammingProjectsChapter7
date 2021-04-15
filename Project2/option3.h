@@ -28,8 +28,9 @@ void option3()
 	}
 	int col = inputInteger("\nEnter the column to place the first queen: ", 1, dimensions);
 	col = col - 1;
-	b1[0][col] = Q;
+	b1[col][0] = Q;
 	Nqueen q1(b1);
+	cout << q1 << endl;
 
 	bool found = q1.solve();
 	if (!found) cout << "No solution" << endl;
