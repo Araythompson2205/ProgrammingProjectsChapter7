@@ -4,182 +4,194 @@
 #include <cstring> // Provides strchr
 #include <iostream> // Provides cout, cin, peek, ignore
 #include <stack> // Provides the stack template class
+#include <string>
 
 using namespace std;
 
-//class arithmetic
-//{
-//private:
-//	const char DECIMAL = '.';
-//	const char RIGHT_PARENTHESIS = ')';
-//	stack <double> numbers;
-//	stack <char> operations;
-//	double number;
-//	char symbol;
-//public:
-//	double read_and_evaluate(istream& ins);
-//	void evaluate_stack_tops(/*stack<double>& numbers, stack<char>& operations*/);
-//	void display();
-//};
-//
-//double arithmetic::read_and_evaluate(istream& ins)
-//{
-//	// Loop continues while istream is not “bad” (tested by ins) and next character isn’t newline.
-//	while (ins && ins.peek() != '\n')
-//	{
-//		if (isdigit(ins.peek()) || (ins.peek() == DECIMAL))
-//		{
-//			ins >> number;
-//			numbers.push(number);
-//		}
-//		else if (strchr("+-*/", ins.peek()) != NULL)
-//		{
-//			ins >> symbol;
-//			operations.push(symbol);
-//		}
-//		else if (ins.peek() == RIGHT_PARENTHESIS)
-//		{
-//			ins.ignore();
-//			evaluate_stack_tops(/*numbers, operations*/);
-//		}
-//		else
-//			ins.ignore();
-//	}
-//	return numbers.top();
-//}
-//
-//// Library facilities used: stack
-//void arithmetic::evaluate_stack_tops(/*stack<double>& numbers, stack<char>& operations*/)
-//{
-//	double operand1, operand2;
-//
-//	operand2 = numbers.top();
-//	numbers.pop();
-//	operand1 = numbers.top();
-//	numbers.pop();
-//
-//	switch (operations.top())
-//	{
-//	case '+': numbers.push(operand1 + operand2); break;
-//	case '-': numbers.push(operand1 - operand2); break;
-//	case '*': numbers.push(operand1 * operand2); break;
-//	case '/': numbers.push(operand1 / operand2); break;
-//	}
-//	operations.pop();
-//}
-//
-////void arithmetic::display(istream& ins)
-////{
-////	while (ins && ins.peek() != '\n')
-////	{
-////		if (isdigit(ins.peek()) || (ins.peek() == DECIMAL))
-////		{
-////			ins >> number;
-////			numbers.push(number);
-////		}
-////		else if (strchr("+-*/", ins.peek()) != NULL)
-////		{
-////			ins >> symbol;
-////			operations.push(symbol);
-////		}
-////		else if (ins.peek() == RIGHT_PARENTHESIS)
-////		{
-////			ins.ignore();
-////			evaluate_stack_tops(/*numbers, operations*/);
-////		}
-////		else
-////			ins.ignore();
-////	}
-////	return numbers.top();
-////}
-
-bool IsOperation(char c);
-int precedence(char c);
-string ConvertInfixToPostfix(string infix, stack<char> hold);
-
-string ConvertInfixToPostfix(string infix, stack<char> hold)
+class arithmetic
 {
+private:
+	const char DECIMAL = '.';
+	const char RIGHT_PARENTHESIS = ')';
+	stack <double> numbers;
+	stack <char> operations;
+	char symbol;
 	string postfix;
+	double number;
+public:
+	arithmetic();
+	string getPostFix() const;
+	double getNumber() const;
+	bool findPostFix();
+	void evaluate(string expression);
+};
+arithmetic::arithmetic()
+{
+	postfix = "";
+	number = 0.0;
 
-	for (int i = 0; i < infix.length(); i++)
-	{
-		if (infix[i] == '(')
-		{
-			hold.push(infix[i]);
-		}
-		else if ((infix[i] >= 'a' && infix[i] <= 'z')|| (infix[i] >= 'A' && infix[i] <= 'Z')|| (infix[i] >= '0' && infix[i] <= '9'))
-		{
-			postfix += infix[i];
-		}
-		else if (IsOperation(infix[i]))
-		{
-			if (hold.empty())
-			{
-				hold.push(infix[i]);
-			}
-			else
-			{
-				if (precedence(infix[i]) <= precedence(hold.top()))
-				{
-					hold.push(infix[i]);
-				}
-				else if ((precedence(infix[i]) == precedence(hold.top())) && (infix[i] == '^'))
-				{
-					hold.push(infix[i]);
-				}
-				else
-				{
-					while ((!hold.empty()) && (precedence(hold.top() >= precedence(infix[i]))))
-					{
-						char temp = hold.top();
-						postfix += temp;
-						hold.pop();
-					}
-					hold.push(infix[i]);
-				}
-			}
-		}
-		else if (infix[i] == ')')
-		{
-			while ((hold.top() != '(') || (!hold.empty()));
-			{
-				char temp = hold.top();
-				postfix += temp;
-				hold.pop();
-			}
-		}
-	}
-	while (!hold.empty())
-	{
-		if (hold.top() == '(')
-		{
-			hold.pop();
-		}
-		postfix += hold.top();
-		hold.pop();
-	}
+}
+int precedence(char operat);
+bool isBalancedParenthesis(const string& expression);
+string arithmetic::getPostFix() const
+{
 	return postfix;
 }
-
-
-bool IsOperation(char c)
+double arithmetic::getNumber() const
 {
-	if (c == '*' || c == '/' || c == '+' || c == '-' || c == '^')
-		return true;
-	else
-		return false;
+	return number;
+}
+bool arithmetic::findPostFix()
+{
+	stack<char> operators;
+	operators.push('|');
+	string infix;
+	char holder;
+	cout << "\n Enter an infix expression: ";
+	cin >> infix;
+	bool valid = isBalancedParenthesis(infix);
+	if (!valid)
+	{
+		return valid;
+	}
+	cout << "\nThe entered infix expression: " << infix << "\n";
+	for (int i = 0; i < infix.length(); i++)
+	{
+		if (infix[i] >= '0' && infix[i] <= '9')
+			postfix += infix[i];
+		else if (infix[i] >= 'a' && infix[i] <= 'z')
+			postfix += infix[i];
+		else if (infix[i] >= 'A' && infix[i] <= 'Z')
+			postfix += infix[i];
+		else if (infix[i] == '(')
+			operators.push('(');
+
+		else if (infix[i] == ')')
+		{
+			while (operators.top() != '(' && operators.top() != '|')
+			{
+				holder = operators.top();
+				operators.pop();
+				postfix += holder;
+			}
+			if (operators.top() == '(')
+			{
+				holder = operators.top();
+				operators.pop();
+			}
+		}
+		else
+		{
+			while (operators.top() != '|' && precedence(infix[i]) <= precedence(operators.top()))
+			{
+				holder = operators.top();
+				operators.pop();
+				postfix += holder;
+			}
+			operators.push(infix[i]);
+		}
+
+	}
+	while (operators.top() != '|')
+	{
+		holder = operators.top();
+		operators.pop();
+		postfix += holder;
+	}
+	return valid;
 }
 
-
-int precedence(char c)
+void arithmetic::evaluate(string expression)
 {
-	if (c == '^')
-		return 1;
-	else if (c == '*' || c == '/')
-		return 2;
-	else if (c == '+' || c == '-')
-		return 3;
-	else
-		return -1;
+	stack <double> operands;
+	for (int i = 0; i < expression.length(); i++)
+	{
+		if (expression[i] >= '0' && expression[i] <= '9')
+			operands.push(expression[i] - '0');
+		else if ((expression[i] >= 'a' && expression[i] <= 'z') || (expression[i] >= 'A' && expression[i] <= 'Z'))
+		{
+			double holder;
+			cout << "\n please enter a number to replace the character '" << expression[i] << "' with";
+			holder = inputDouble(":");
+			operands.push(holder);
+		}
+		else
+		{
+			double a, b;
+			a = operands.top();
+			operands.pop();
 
+			b = operands.top();
+			operands.pop();
+
+			if (expression[i] == '+')
+			{
+				operands.push(b + a);
+			}
+			else if (expression[i] == '-')
+			{
+				operands.push(b - a);
+			}
+			else if (expression[i] == '*')
+			{
+				operands.push(b * a);
+			}
+			else if (expression[i] == '/')
+			{
+				operands.push(b / a);
+			}
+			else if (expression[i] == '^')
+			{
+				operands.push(pow(b, a));
+			}
+		}
+
+	}
+	number = operands.top();
+}
+int precedence(char operat)
+{
+	switch (operat)
+	{
+	case '+':  return 1; break;
+	case '-':  return 1; break;
+	case '*':  return 2; break;
+	case '/':  return 2; break;
+	case '^':  return 3; break;
+	default:  return-1; break;
+	}
+}
+bool isBalancedParenthesis(const string& expression)
+{
+	const char LEFT_PARENTHESIS = '(';
+	const char RIGHT_PARENTHESIS = ')';
+	int parenthesisCounter = 0;
+	stack<char> store;
+	char next;
+
+	bool failed = false;
+
+	for (unsigned int i = 0; !failed && (i < expression.length()); i++)
+	{
+		next = expression[i];
+		if (next == LEFT_PARENTHESIS)
+		{
+			parenthesisCounter++;
+			store.push(next);
+		}
+		else if ((next == RIGHT_PARENTHESIS) && (!store.empty()))
+		{
+			parenthesisCounter++;
+			store.pop();
+		}
+		else if ((next == RIGHT_PARENTHESIS) && (store.empty()))
+		{
+			parenthesisCounter++;
+			failed = true;
+		}
+	}
+	if (parenthesisCounter == 0)
+		return true;
+	else
+		return (store.empty() && !failed);
 }

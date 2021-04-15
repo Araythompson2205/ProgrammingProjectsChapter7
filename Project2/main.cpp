@@ -72,33 +72,30 @@ void option1()
 
 void option2()
 {
-	///*arithmetic test;
-	//cout << "enter: ";
-	//test.read_and_evaluate(cin);
-	//test.display();*/
-	//double ans;
-	//cout << "enter: ";
-	//ans = read_and_evaluate(cin);
-	//cout << "\n\n" << ans;
-
-	string infix, postfix;
-
-	stack<char> hold;
-
-	system("cls");
-	cout << "\n 2>Translation of arithmetic expression \n";
-	cout << string(100, char(196)) << '\n';
-
-	cout << "Type a infix expression:   ";
-	getline(cin, infix);
-	cout << endl;
-
-	cout << "Infix Expression: " << infix << endl;
-
-	postfix = ConvertInfixToPostfix(infix, hold);
-
-	cout << "Postfix Expression:  " << postfix << endl;
-
+	char yes = 'y', no = 'n';
+	do
+	{
+		arithmetic calc;
+		string postfix;
+		double number;
+		bool valid = calc.findPostFix();
+		if (valid)
+		{
+			postfix = calc.getPostFix();
+			cout << "The translated postfix expression: " << postfix << '\n';
+			calc.evaluate(postfix);
+			number = calc.getNumber();
+			cout << "The expression evaluates to " << number << '\n';
+		}
+		else
+		{
+			cout << "ERROR: unbalaced parentheses!";
+		}
+		char choice = toupper(inputChar("Run again?(Y or N): ", yes, no));
+		if (choice == 'N')
+			break;
+	} while (true);
+	return;
 }
 
 double read_and_evaluate(istream& ins)
