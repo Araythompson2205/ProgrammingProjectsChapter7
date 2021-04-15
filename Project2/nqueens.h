@@ -17,18 +17,20 @@ class Nqueen
 		static const int NO_Q = 0;
 		static const int INFLUENCE = -1;
 
-		// accepts 2d array with queen = true;
+		//preconditions:a 2d vector of integers
+		//postconditions: creates a Nqueens object with its board as the passed in vector
 		Nqueen(std::vector<std::vector<int>> board);
-		// finds where to place queens to win
+		//preconditions: a Nqueens object, and a first move
+		//postcondtions: returns true when a solution is found and false when it is not
 		bool solve();
-
-		// determines if there is a queen already
+		//preconditions: an Nqueens object, and solve is running
+		//postconditions: returns true if a generated queen conflicts with another, false if not	
 		bool isConflict();
-
-		// fastest way to determine if there is a queen already
+		//preconditions: an Nqueens object, and solve is running
+		//postconditions: returns true if a generated queen conflicts with another, false if not, but faster
 		bool isConflictFast(int col, int row, std::vector<std::vector<int>>& board);
-
-
+		//preconditions: an nqueens object
+		//postconditions: returns true if the path is free, false if not
 		template <typename Xtf, typename Ytf>
 		inline bool isPathFree(int x, int y, Xtf&& xtf, Ytf&& ytf)
 		{
@@ -44,7 +46,8 @@ class Nqueen
 			}
 			return true;
 		}
-
+		//preconditions: a Nqueens object
+		//postconditions: displays the board, and locations of all present queens
 		friend ostream& operator << (ostream& outs, const Nqueen& obj);
 
 	private:
