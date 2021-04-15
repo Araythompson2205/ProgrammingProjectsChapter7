@@ -72,17 +72,28 @@ void option1()
 
 void option2()
 {
-	/*arithmetic test;
+	///*arithmetic test;
+	//cout << "enter: ";
+	//test.read_and_evaluate(cin);
+	//test.display();*/
+	//double ans;
+	//cout << "enter: ";
+	//ans = read_and_evaluate(cin);
+	//cout << "\n\n" << ans;
 
-	cout << "enter: ";
-	test.read_and_evaluate(cin);
+	string infix, postfix;
 
-	test.display();*/
+	stack<char> hold;
 
-	double ans;
-	cout << "enter: ";
-	ans = read_and_evaluate(cin);
-	cout << "\n\n" << ans;
+	cout << "Type a infix expression:   ";
+	getline(cin, infix);
+	cout << endl;
+
+	cout << "Infix Expression: " << infix << endl;
+
+	postfix = ConvertInfixToPostfix(infix, hold);
+
+	cout << "Postfix Expression:  " << postfix << endl;
 
 }
 
