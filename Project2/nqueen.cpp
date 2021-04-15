@@ -91,3 +91,19 @@ bool Nqueen::solve()
 	}
 	return false;
 }
+
+ostream& operator << (ostream& outs, const Nqueen& obj)
+{
+	for (int i = 0; i < obj.board.size(); i++) {
+		for (int j = 0; j < obj.board.size(); j++) {
+			outs << '|';
+			if (obj.board[j][i] == Nqueen::NO_Q)
+				outs << '_';
+			else if (obj.board[j][i] == Nqueen::Q)
+				outs << 'Q';
+
+		}
+		outs << '|' << '\n';
+	}
+	return outs;
+}
