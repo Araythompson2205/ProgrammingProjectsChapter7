@@ -85,6 +85,10 @@ void option2()
 
 	stack<char> hold;
 
+	system("cls");
+	cout << "\n 2>Translation of arithmetic expression \n";
+	cout << string(100, char(196)) << '\n';
+
 	cout << "Type a infix expression:   ";
 	getline(cin, infix);
 	cout << endl;

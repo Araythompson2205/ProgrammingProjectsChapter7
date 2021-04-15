@@ -174,11 +174,11 @@ bool IsOperation(char c)
 int precedence(char c)
 {
 	if (c == '^')
-		return 3;
+		return 1;
 	else if (c == '*' || c == '/')
 		return 2;
 	else if (c == '+' || c == '-')
-		return 1;
+		return 3;
 	else
 		return -1;
 
