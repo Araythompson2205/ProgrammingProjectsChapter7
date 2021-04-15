@@ -1,4 +1,4 @@
-//names: Gia Minh Hoang, Duyen Tran, Andrew Thompson
+//names: Gia Minh Hoang, Duyen Tran, Andrew Thompson, And  Lincoln Nguyen 
 //date due: 4/14/2021
 //description: class declaration and definition for a small calculator program, with some non-member functions also used by the program.
 #pragma once
