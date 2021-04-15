@@ -1,4 +1,4 @@
-// Participants: Gabriela Lopez, Andrew Thompson, Long Duong, Christopher Gomez, Gia Minh Hoang, Duyen Tran and Lincoln Nguyen
+// Participants: Gabriela Lopez, Andrew Thompson, Long Duong, Gia Minh Hoang, Duyen Tran and Lincoln Nguyen
 // Date: 04-8-21
 // Description: Chapter 7 Solution
 
